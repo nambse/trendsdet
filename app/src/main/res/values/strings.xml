@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Trend SDET</string>
+
+    <!-- Navigation -->
+    <string name="go_back">Go back</string>
+    <string name="search_products">Search products</string>
+    <string name="go_to_cart">Go to cart</string>
+
+    <!-- Home -->
+    <string name="home_title">Trend SDET</string>
+    <string name="no_products_found">No products found</string>
+
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="search_placeholder">Search products&#8230;</string>
+    <string name="clear_search">Clear search</string>
+    <string name="no_results_for">No products found for \"%1$s\"</string>
+    <string name="start_typing_to_search">Start typing to search products</string>
+
+    <!-- Product Detail -->
+    <string name="product_details_title">Product Details</string>
+    <string name="options">Options</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="added_to_cart">Added to cart!</string>
+
+    <!-- Cart -->
+    <string name="cart_title">Cart</string>
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
+    <string name="decrease_quantity">Decrease quantity</string>
+    <string name="increase_quantity">Increase quantity</string>
+    <string name="remove_item">Remove %1$s from cart</string>
+
+    <!-- Checkout -->
+    <string name="checkout_title">Checkout</string>
+
+    <!-- Common -->
+    <string name="retry">Retry</string>
+    <string name="product_image">Product image for %1$s</string>
+</resources>
