@@ -1,10 +1,11 @@
 package com.example.trend_sdet.screen
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import com.example.trend_sdet.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -26,8 +27,8 @@ class HomeScreenTest {
             composeTestRule.onAllNodes(hasText("Classic Sneakers"))
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("Classic Sneakers").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Running Shoes").assertIsDisplayed()
+        composeTestRule.onAllNodes(hasText("Classic Sneakers")).onFirst().assertIsDisplayed()
+        composeTestRule.onAllNodes(hasText("Running Shoes")).onFirst().assertIsDisplayed()
     }
 
     @Test
@@ -36,8 +37,9 @@ class HomeScreenTest {
             composeTestRule.onAllNodes(hasText("New Arrivals"))
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("New Arrivals").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Best Sellers").assertIsDisplayed()
+        // Collections may appear in both banner and category row
+        composeTestRule.onAllNodes(hasText("New Arrivals")).onFirst().assertIsDisplayed()
+        composeTestRule.onAllNodes(hasText("Best Sellers")).onFirst().assertIsDisplayed()
     }
 
     @Test

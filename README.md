@@ -42,11 +42,31 @@ A Shopify-backed e-commerce Android app built with Jetpack Compose, designed to 
 
 ## Testing
 
-The app includes **90+ testTag identifiers** across all 6 screens, with `testTagsAsResourceId = true` for Maestro and Espresso compatibility.
+Full testing pyramid with **90+ testTag identifiers** across all 6 screens, `testTagsAsResourceId = true` for Maestro and Espresso compatibility.
 
-### Maestro E2E Tests
+### Unit Tests (86 tests)
 
-A comprehensive Maestro test suite with **25 flows** organized into smoke, feature, and regression suites.
+ViewModel and domain model tests using hand-written fakes, Turbine for Flow testing, and Google Truth assertions.
+
+```bash
+./gradlew test
+```
+
+Covers all 6 ViewModels (Home, Search, ProductDetail, Cart, Checkout, Favorites) plus Money formatting — including debounce behavior, state machines, variant selection logic, and price filtering.
+
+### Compose UI Tests (13 tests)
+
+Instrumented tests using Hilt `@TestInstallIn` for dependency replacement, `createAndroidComposeRule`, and Compose semantics assertions.
+
+```bash
+./gradlew connectedDebugAndroidTest
+```
+
+Covers screen rendering, bottom navigation, search input, checkout flow, and empty/populated state transitions.
+
+### Maestro E2E Tests (25 flows)
+
+End-to-end tests organized into smoke, feature, and regression suites.
 
 ```bash
 # Install Maestro
@@ -63,9 +83,8 @@ See [`.maestro/README.md`](.maestro/README.md) for the full test strategy docume
 
 ### CI/CD
 
-GitHub Actions runs Maestro tests automatically:
-- **Pull requests:** Smoke tests for fast feedback
-- **Push to main:** Full suite (smoke + feature + regression)
+- **Every push/PR:** Build + unit tests (GitHub Actions)
+- **Push to main:** Maestro E2E full suite (smoke + feature + regression)
 
 ## Architecture
 

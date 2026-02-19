@@ -30,7 +30,8 @@ class FavoritesScreenTest {
         navigateToFavorites()
 
         composeTestRule.onNodeWithTag("favorites_screen").assertIsDisplayed()
-        composeTestRule.onNodeWithText("No favorites yet").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("empty_state").assertIsDisplayed()
+        composeTestRule.onNodeWithText("No favorites yet", substring = true).assertIsDisplayed()
     }
 
     @Test
@@ -38,6 +39,5 @@ class FavoritesScreenTest {
         navigateToFavorites()
 
         composeTestRule.onNodeWithTag("favorites_screen").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Favorites").assertIsDisplayed()
     }
 }

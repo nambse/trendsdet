@@ -28,3 +28,9 @@ jobs:
           SHOPIFY_DOMAIN: ${{ secrets.SHOPIFY_DOMAIN }}
           SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.SHOPIFY_STOREFRONT_TOKEN }}
         run: ./gradlew assembleDebug
+
+      - name: Run unit tests
+        env:
+          SHOPIFY_DOMAIN: ${{ secrets.SHOPIFY_DOMAIN }}
+          SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.SHOPIFY_STOREFRONT_TOKEN }}
+        run: ./gradlew test
