@@ -1,0 +1,30 @@
+appId: com.example.trend_sdet
+name: "Regression: Empty Cart Checkout"
+tags:
+  - regression
+  - cart
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_cart.yaml
+
+# Assert empty cart state
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: "Your cart is empty"
+
+# Checkout button should NOT be visible on empty cart
+- assertNotVisible:
+    id: "cart_checkout_button"
+
+# Tap continue shopping
+- tapOn:
+    id: "cart_continue_shopping_button"
+
+# Should navigate to home
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000

@@ -1,0 +1,19 @@
+appId: com.example.trend_sdet
+---
+# Scroll down to the Products section on Home screen
+- scrollUntilVisible:
+    element:
+      text: "Products"
+    direction: DOWN
+    timeout: 15000
+
+# Tap the first product card by matching price text pattern (e.g. "$19.99" or "From $19.99")
+- tapOn:
+    text: "\\$.*"
+    index: 0
+
+# Assert PDP loaded
+- extendedWaitUntil:
+    visible:
+      id: "product_detail_screen"
+    timeout: 15000

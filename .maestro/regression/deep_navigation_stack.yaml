@@ -1,0 +1,65 @@
+appId: com.example.trend_sdet
+name: "Regression: Deep Navigation Stack"
+tags:
+  - regression
+  - navigation
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# 1. Home → PDP
+- runFlow: ../subflows/open_first_product.yaml
+- extendedWaitUntil:
+    visible:
+      id: "detail_product_title"
+    timeout: 10000
+
+# 2. PDP → Back → Home
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000
+
+# 3. Home → Search
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# 4. Search → type query → wait for results
+- tapOn:
+    id: "search_text_field"
+- inputText: "shirt"
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000
+
+# Dismiss keyboard before tapping result
+- pressKey: back
+
+# Tap first search result via price
+- tapOn:
+    text: "\\$.*"
+    index: 0
+
+# Wait for PDP
+- extendedWaitUntil:
+    visible:
+      id: "product_detail_screen"
+    timeout: 20000
+
+# 5. PDP → Back → Search
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "search_screen"
+    timeout: 10000
+
+# 6. Search → Cart
+- runFlow: ../subflows/navigate_to_cart.yaml

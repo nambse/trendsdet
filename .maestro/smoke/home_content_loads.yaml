@@ -1,0 +1,31 @@
+appId: com.example.trend_sdet
+name: "Smoke: Home Content Loads"
+tags:
+  - smoke
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content to load (not skeleton)
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Verify banner carousel
+- extendedWaitUntil:
+    visible:
+      id: "banner_carousel"
+    timeout: 15000
+- assertVisible:
+    id: "banner_image_0"
+
+# Verify Categories section
+- assertVisible:
+    text: "Categories"
+
+# Scroll to Products section
+- scrollUntilVisible:
+    element:
+      text: "Products"
+    direction: DOWN
+    timeout: 15000

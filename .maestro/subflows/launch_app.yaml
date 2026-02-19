@@ -1,0 +1,7 @@
+appId: com.example.trend_sdet
+---
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 15000

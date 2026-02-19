@@ -1,0 +1,38 @@
+appId: com.example.trend_sdet
+name: "Regression: Pull to Refresh Home"
+tags:
+  - regression
+  - home
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content to load
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+- extendedWaitUntil:
+    visible:
+      id: "banner_carousel"
+    timeout: 15000
+
+# Perform pull-to-refresh gesture
+- swipe:
+    start: 50%, 30%
+    end: 50%, 80%
+
+# Content should still be visible after refresh
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+- extendedWaitUntil:
+    visible:
+      id: "banner_carousel"
+    timeout: 15000
+
+# Verify categories still present
+- extendedWaitUntil:
+    visible:
+      text: "Categories"
+    timeout: 10000

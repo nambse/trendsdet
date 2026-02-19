@@ -1,0 +1,8 @@
+appId: com.example.trend_sdet
+---
+- tapOn:
+    id: "bottom_nav_cart"
+- extendedWaitUntil:
+    visible:
+      id: "cart_screen"
+    timeout: 10000

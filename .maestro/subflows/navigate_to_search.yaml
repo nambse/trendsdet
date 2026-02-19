@@ -1,0 +1,8 @@
+appId: com.example.trend_sdet
+---
+- tapOn:
+    id: "bottom_nav_search"
+- extendedWaitUntil:
+    visible:
+      id: "search_screen"
+    timeout: 10000

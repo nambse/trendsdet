@@ -1,0 +1,50 @@
+appId: com.example.trend_sdet
+name: "Feature: Search Filter and Sort"
+tags:
+  - feature
+  - search
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Search for something first
+- tapOn:
+    id: "search_text_field"
+- inputText: "shirt"
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000
+
+# Open filter/sort sheet
+- tapOn:
+    id: "search_filter_button"
+
+# Wait for sheet content to appear
+- extendedWaitUntil:
+    visible:
+      text: "Sort By"
+    timeout: 5000
+
+# Verify sort options via text (testTags inside ModalBottomSheet may not register)
+- assertVisible:
+    text: "Relevance"
+- assertVisible:
+    text: "Price: Low to High"
+
+# Select "Price: Low to High"
+- tapOn:
+    text: "Price: Low to High"
+
+# Verify price range section
+- assertVisible:
+    text: "Price Range"
+
+# Dismiss sheet by pressing back
+- pressKey: back
+
+# Results should still be visible
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000

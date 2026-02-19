@@ -1,0 +1,41 @@
+appId: com.example.trend_sdet
+name: "Feature: Cart Manage Items"
+tags:
+  - feature
+  - cart
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Add first product to cart
+- runFlow: ../subflows/add_first_product_to_cart.yaml
+
+# Navigate to cart via back + tab
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000
+- runFlow: ../subflows/navigate_to_cart.yaml
+
+# Assert cart has items
+- extendedWaitUntil:
+    visible:
+      id: "cart_items_list"
+    timeout: 15000
+
+# Assert price summary
+- assertVisible:
+    id: "cart_subtotal_amount"
+- assertVisible:
+    id: "cart_total_amount"
+
+# Assert checkout button
+- assertVisible:
+    id: "cart_checkout_button"

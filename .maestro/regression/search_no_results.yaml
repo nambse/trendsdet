@@ -1,0 +1,31 @@
+appId: com.example.trend_sdet
+name: "Regression: Search No Results"
+tags:
+  - regression
+  - search
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Search for something that doesn't exist
+- tapOn:
+    id: "search_text_field"
+- inputText: "xyznonexistent99999"
+
+# Assert empty state with no results message
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 15000
+- assertVisible:
+    text: "No products found.*"
+
+# Clear search
+- tapOn:
+    id: "search_clear_button"
+
+# Initial prompt should return
+- extendedWaitUntil:
+    visible:
+      text: "Start typing to search products"
+    timeout: 10000

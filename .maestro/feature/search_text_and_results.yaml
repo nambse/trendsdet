@@ -1,0 +1,43 @@
+appId: com.example.trend_sdet
+name: "Feature: Search Text and Results"
+tags:
+  - feature
+  - search
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Verify initial empty state with prompt
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: "Start typing to search products"
+
+# Type search query
+- tapOn:
+    id: "search_text_field"
+- inputText: "shirt"
+
+# Wait for results
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000
+
+# Verify clear button appears
+- assertVisible:
+    id: "search_clear_button"
+
+# Clear search
+- tapOn:
+    id: "search_clear_button"
+
+# Empty state should return
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: "Start typing to search products"

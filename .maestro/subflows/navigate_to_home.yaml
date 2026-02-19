@@ -1,0 +1,8 @@
+appId: com.example.trend_sdet
+---
+- tapOn:
+    id: "bottom_nav_home"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000

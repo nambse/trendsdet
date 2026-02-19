@@ -1,0 +1,63 @@
+appId: com.example.trend_sdet
+name: "Feature: Home Banner and Categories"
+tags:
+  - feature
+  - home
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Verify banner carousel elements
+- assertVisible:
+    id: "banner_carousel"
+- assertVisible:
+    id: "banner_image_0"
+
+# Swipe banner to next slide
+- swipe:
+    start: 80%, 25%
+    end: 20%, 25%
+- extendedWaitUntil:
+    visible:
+      id: "banner_image_1"
+    timeout: 5000
+
+# Verify Categories section
+- assertVisible:
+    text: "Categories"
+- assertVisible:
+    id: "category_row"
+
+# Tap first collection card (dynamic IDs, use regex)
+- tapOn:
+    id: "collection_card_.*"
+    index: 0
+
+# Should land on search screen with collection filter
+- extendedWaitUntil:
+    visible:
+      id: "search_screen"
+    timeout: 10000
+
+# Go back to home
+- runFlow: ../subflows/navigate_to_home.yaml
+
+# Pull to refresh
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+- swipe:
+    start: 50%, 30%
+    end: 50%, 80%
+
+# Content should still be visible after refresh
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000

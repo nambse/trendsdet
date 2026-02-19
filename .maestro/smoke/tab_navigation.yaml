@@ -1,0 +1,18 @@
+appId: com.example.trend_sdet
+name: "Smoke: Tab Navigation"
+tags:
+  - smoke
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Navigate to Search
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Navigate to Favorites
+- runFlow: ../subflows/navigate_to_favorites.yaml
+
+# Navigate to Cart
+- runFlow: ../subflows/navigate_to_cart.yaml
+
+# Navigate back to Home
+- runFlow: ../subflows/navigate_to_home.yaml

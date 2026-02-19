@@ -1,0 +1,45 @@
+appId: com.example.trend_sdet
+name: "Regression: Cart Badge Updates"
+tags:
+  - regression
+  - cart
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Verify cart is empty initially
+- runFlow: ../subflows/navigate_to_cart.yaml
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+
+# Go back to home
+- runFlow: ../subflows/navigate_to_home.yaml
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Add first product to cart
+- runFlow: ../subflows/add_first_product_to_cart.yaml
+
+# Go back to home
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000
+
+# Verify cart now has items by navigating to cart tab
+- runFlow: ../subflows/navigate_to_cart.yaml
+- extendedWaitUntil:
+    visible:
+      id: "cart_items_list"
+    timeout: 15000

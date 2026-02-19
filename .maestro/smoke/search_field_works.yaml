@@ -1,0 +1,18 @@
+appId: com.example.trend_sdet
+name: "Smoke: Search Field Works"
+tags:
+  - smoke
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Type a search query
+- tapOn:
+    id: "search_text_field"
+- inputText: "shirt"
+
+# Assert results grid appears
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000

@@ -1,0 +1,8 @@
+appId: com.example.trend_sdet
+---
+- tapOn:
+    id: "bottom_nav_favorites"
+- extendedWaitUntil:
+    visible:
+      id: "favorites_screen"
+    timeout: 10000

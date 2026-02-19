@@ -1,0 +1,20 @@
+appId: com.example.trend_sdet
+name: "Regression: Favorites Empty State"
+tags:
+  - regression
+  - favorites
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_favorites.yaml
+
+# Assert empty state
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: ".*No favorites yet.*"
+
+# Product grid should NOT be visible
+- assertNotVisible:
+    id: "favorites_product_grid"

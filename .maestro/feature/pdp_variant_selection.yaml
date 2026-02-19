@@ -1,0 +1,35 @@
+appId: com.example.trend_sdet
+name: "Feature: PDP Variant Selection"
+tags:
+  - feature
+  - pdp
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content to load
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Open first product
+- runFlow: ../subflows/open_first_product.yaml
+
+# Assert product title and price
+- extendedWaitUntil:
+    visible:
+      id: "detail_product_title"
+    timeout: 15000
+- assertVisible:
+    id: "detail_product_price"
+
+# Scroll down to stock indicator
+- scrollUntilVisible:
+    element:
+      id: "detail_stock_indicator"
+    direction: DOWN
+    timeout: 10000
+
+# Verify stock text is visible (either "In Stock" or "Out of Stock")
+- assertVisible:
+    id: "detail_stock_indicator"

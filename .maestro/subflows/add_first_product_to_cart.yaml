@@ -1,0 +1,20 @@
+appId: com.example.trend_sdet
+---
+# Open first product from home
+- runFlow: ../subflows/open_first_product.yaml
+
+# Wait for add to cart button to be ready
+- extendedWaitUntil:
+    visible:
+      id: "detail_add_to_cart_button"
+    timeout: 15000
+
+# Tap add to cart
+- tapOn:
+    id: "detail_add_to_cart_button"
+
+# Assert snackbar confirmation
+- extendedWaitUntil:
+    visible:
+      text: "Added to cart!"
+    timeout: 10000

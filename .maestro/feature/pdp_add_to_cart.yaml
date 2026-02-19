@@ -1,0 +1,61 @@
+appId: com.example.trend_sdet
+name: "Feature: PDP Add to Cart"
+tags:
+  - feature
+  - pdp
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Open first product
+- runFlow: ../subflows/open_first_product.yaml
+
+# Verify quantity selector
+- extendedWaitUntil:
+    visible:
+      id: "detail_quantity_selector"
+    timeout: 15000
+
+# Increase quantity
+- tapOn:
+    id: "qty_plus_detail"
+- extendedWaitUntil:
+    visible:
+      id: "qty_count_detail"
+    timeout: 5000
+
+# Decrease quantity back
+- tapOn:
+    id: "qty_minus_detail"
+
+# Add to cart
+- tapOn:
+    id: "detail_add_to_cart_button"
+
+# Assert snackbar confirmation
+- extendedWaitUntil:
+    visible:
+      text: "Added to cart!"
+    timeout: 10000
+
+# Go back to home
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000
+
+# Verify item was added by navigating to cart
+- runFlow: ../subflows/navigate_to_cart.yaml
+- extendedWaitUntil:
+    visible:
+      id: "cart_items_list"
+    timeout: 15000
+- assertVisible:
+    id: "cart_checkout_button"

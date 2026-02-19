@@ -1,0 +1,44 @@
+appId: com.example.trend_sdet
+name: "Feature: PDP Description Toggle"
+tags:
+  - feature
+  - pdp
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Open first product
+- runFlow: ../subflows/open_first_product.yaml
+
+# Scroll to description section
+- scrollUntilVisible:
+    element:
+      text: "Description"
+    direction: DOWN
+    timeout: 10000
+
+# Assert description text is visible
+- assertVisible:
+    id: "detail_product_description"
+
+# Conditionally expand/collapse if toggle exists (only for long descriptions)
+- runFlow:
+    when:
+      visible:
+        id: "detail_description_toggle"
+    commands:
+      # Tap to expand
+      - tapOn:
+          id: "detail_description_toggle"
+      - assertVisible:
+          text: "Read less"
+      # Tap to collapse
+      - tapOn:
+          id: "detail_description_toggle"
+      - assertVisible:
+          text: "Read more"

@@ -1,0 +1,25 @@
+appId: com.example.trend_sdet
+name: "Feature: Search Collection Chips"
+tags:
+  - feature
+  - search
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_search.yaml
+
+# Assert collection chips load
+- extendedWaitUntil:
+    visible:
+      id: "search_collection_chips"
+    timeout: 15000
+
+# Tap the first collection chip (dynamic IDs, use regex)
+- tapOn:
+    id: "search_chip_.*"
+    index: 0
+
+# Wait for results to appear
+- extendedWaitUntil:
+    visible:
+      id: "search_product_grid"
+    timeout: 15000

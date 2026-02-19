@@ -1,0 +1,17 @@
+appId: com.example.trend_sdet
+name: "Smoke: Cart Empty State"
+tags:
+  - smoke
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+- runFlow: ../subflows/navigate_to_cart.yaml
+
+# Assert empty cart UI
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: "Your cart is empty"
+- assertVisible:
+    id: "cart_continue_shopping_button"

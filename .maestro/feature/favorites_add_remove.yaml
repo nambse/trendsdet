@@ -1,0 +1,57 @@
+appId: com.example.trend_sdet
+name: "Feature: Favorites Add and Remove"
+tags:
+  - feature
+  - favorites
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Verify favorites is empty initially
+- runFlow: ../subflows/navigate_to_favorites.yaml
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000
+- assertVisible:
+    text: ".*No favorites yet.*"
+
+# Go back to home
+- runFlow: ../subflows/navigate_to_home.yaml
+
+# Wait for content to load
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Scroll to products section
+- scrollUntilVisible:
+    element:
+      text: "Products"
+    direction: DOWN
+    timeout: 15000
+
+# Tap "Add to favorites" on first product card via contentDescription
+- tapOn:
+    text: "Add to favorites"
+    index: 0
+
+# Navigate to Favorites tab
+- runFlow: ../subflows/navigate_to_favorites.yaml
+
+# Favorites grid should now be visible
+- extendedWaitUntil:
+    visible:
+      id: "favorites_product_grid"
+    timeout: 10000
+
+# Remove from favorites via contentDescription
+- tapOn:
+    text: "Remove from favorites"
+    index: 0
+
+# Empty state should return
+- extendedWaitUntil:
+    visible:
+      id: "empty_state"
+    timeout: 10000

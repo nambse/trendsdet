@@ -1,0 +1,25 @@
+appId: com.example.trend_sdet
+name: "Smoke: Back Navigation"
+tags:
+  - smoke
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Open first product
+- runFlow: ../subflows/open_first_product.yaml
+
+# Tap back button
+- tapOn:
+    id: "detail_back_button"
+
+# Assert we're back on home
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000

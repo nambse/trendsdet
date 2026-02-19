@@ -1,0 +1,47 @@
+appId: com.example.trend_sdet
+name: "Feature: Cart to Checkout"
+tags:
+  - feature
+  - cart
+---
+- runFlow: ../subflows/launch_app_clean.yaml
+
+# Wait for content
+- extendedWaitUntil:
+    visible:
+      id: "home_content"
+    timeout: 15000
+
+# Add first product to cart
+- runFlow: ../subflows/add_first_product_to_cart.yaml
+
+# Navigate to cart
+- tapOn:
+    id: "detail_back_button"
+- extendedWaitUntil:
+    visible:
+      id: "home_screen"
+    timeout: 10000
+- runFlow: ../subflows/navigate_to_cart.yaml
+
+# Wait for cart to load
+- extendedWaitUntil:
+    visible:
+      id: "cart_items_list"
+    timeout: 15000
+
+# Tap checkout
+- tapOn:
+    id: "cart_checkout_button"
+
+# Assert checkout screen elements
+- extendedWaitUntil:
+    visible:
+      id: "checkout_order_summary_title"
+    timeout: 15000
+- assertVisible:
+    id: "checkout_items_list"
+- assertVisible:
+    id: "checkout_total_amount"
+- assertVisible:
+    id: "checkout_place_order_button"
