@@ -35,10 +35,20 @@ tags:
       # Tap to expand
       - tapOn:
           id: "detail_description_toggle"
+      - scrollUntilVisible:
+          element:
+            id: "detail_description_toggle"
+          direction: DOWN
+          timeout: 5000
       - assertVisible:
           text: "Read less"
       # Tap to collapse
       - tapOn:
           id: "detail_description_toggle"
+      - scrollUntilVisible:
+          element:
+            id: "detail_description_toggle"
+          direction: UP
+          timeout: 5000
       - assertVisible:
           text: "Read more"
