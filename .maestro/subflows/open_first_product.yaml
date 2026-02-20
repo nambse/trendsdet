@@ -1,21 +1,21 @@
 appId: com.example.trend_sdet
 ---
-# Wait for products section to appear (may take time on CI emulators)
+# Wait for product cards to load (may take time on CI emulators)
 - extendedWaitUntil:
     visible:
-      text: "Products"
+      id: "product_card_.*"
     timeout: 30000
 
 # Scroll down to the Products section on Home screen
 - scrollUntilVisible:
     element:
-      text: "Products"
+      id: "product_card_.*"
     direction: DOWN
     timeout: 15000
 
-# Tap the first product card by matching price text pattern (e.g. "$19.99" or "From $19.99")
+# Tap the first product card by testTag
 - tapOn:
-    text: "\\$.*"
+    id: "product_card_.*"
     index: 0
 
 # Assert PDP loaded
