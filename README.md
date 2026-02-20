@@ -30,15 +30,12 @@ A Shopify-backed e-commerce Android app built with Jetpack Compose, designed to 
 
 ### Setup
 1. Clone the repository
-2. Set environment variables for Shopify credentials:
-   ```bash
-   export SHOPIFY_DOMAIN="your-store.myshopify.com"
-   export SHOPIFY_STOREFRONT_TOKEN="your-token"
-   ```
-3. Build and run:
+2. Build and run:
    ```bash
    ./gradlew installDebug
    ```
+
+Shopify Storefront API credentials are included in the build config (public, read-only access).
 
 ## Testing
 

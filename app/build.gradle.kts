@@ -1,17 +1,9 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
-}
-
-val localProperties = Properties()
-val localPropertiesFile = rootProject.file("local.properties")
-if (localPropertiesFile.exists()) {
-    localProperties.load(localPropertiesFile.inputStream())
 }
 
 android {
@@ -27,16 +19,9 @@ android {
 
         testInstrumentationRunner = "com.example.trend_sdet.HiltTestRunner"
 
-        buildConfigField(
-            "String",
-            "SHOPIFY_DOMAIN",
-            "\"${localProperties.getProperty("SHOPIFY_DOMAIN") ?: System.getenv("SHOPIFY_DOMAIN") ?: ""}\""
-        )
-        buildConfigField(
-            "String",
-            "SHOPIFY_STOREFRONT_TOKEN",
-            "\"${localProperties.getProperty("SHOPIFY_STOREFRONT_TOKEN") ?: System.getenv("SHOPIFY_STOREFRONT_TOKEN") ?: ""}\""
-        )
+        // Shopify Storefront API credentials (public, read-only access)
+        buildConfigField("String", "SHOPIFY_DOMAIN", "\"sefadevtest.myshopify.com\"")
+        buildConfigField("String", "SHOPIFY_STOREFRONT_TOKEN", "\"30a2de851a1e1d2f6ce1c83e9a040a4f\"")
     }
 
     buildTypes {

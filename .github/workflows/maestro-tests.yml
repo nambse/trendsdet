@@ -29,9 +29,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build debug APK
-        env:
-          SHOPIFY_DOMAIN: ${{ secrets.SHOPIFY_DOMAIN }}
-          SHOPIFY_STOREFRONT_TOKEN: ${{ secrets.SHOPIFY_STOREFRONT_TOKEN }}
         run: ./gradlew assembleDebug
 
       - name: Enable KVM
