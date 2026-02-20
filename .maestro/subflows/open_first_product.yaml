@@ -1,5 +1,11 @@
 appId: com.example.trend_sdet
 ---
+# Wait for products section to appear (may take time on CI emulators)
+- extendedWaitUntil:
+    visible:
+      text: "Products"
+    timeout: 30000
+
 # Scroll down to the Products section on Home screen
 - scrollUntilVisible:
     element:

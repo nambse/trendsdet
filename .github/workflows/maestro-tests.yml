@@ -80,5 +80,4 @@ jobs:
           path: |
             smoke-results.xml
             full-results.xml
-            ~/.maestro/tests/**
           retention-days: 14
