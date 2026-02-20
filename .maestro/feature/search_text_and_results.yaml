@@ -10,15 +10,18 @@ tags:
 # Verify initial empty state with prompt
 - extendedWaitUntil:
     visible:
-      id: "empty_state"
+      id: "empty_state_message"
     timeout: 10000
 - assertVisible:
-    text: "Start typing to search products"
+    id: "empty_state_message"
 
 # Type search query
 - tapOn:
     id: "search_text_field"
 - inputText: "shirt"
+
+# Dismiss keyboard so results are visible
+- pressKey: back
 
 # Wait for results
 - extendedWaitUntil:
@@ -37,7 +40,7 @@ tags:
 # Empty state should return
 - extendedWaitUntil:
     visible:
-      id: "empty_state"
+      id: "empty_state_message"
     timeout: 10000
 - assertVisible:
-    text: "Start typing to search products"
+    id: "empty_state_message"

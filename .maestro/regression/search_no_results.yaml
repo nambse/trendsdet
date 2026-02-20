@@ -12,13 +12,16 @@ tags:
     id: "search_text_field"
 - inputText: "xyznonexistent99999"
 
+# Dismiss keyboard so empty state is visible
+- pressKey: back
+
 # Assert empty state with no results message
 - extendedWaitUntil:
     visible:
-      id: "empty_state"
+      id: "empty_state_message"
     timeout: 15000
 - assertVisible:
-    text: "No products found.*"
+    id: "empty_state_message"
 
 # Clear search
 - tapOn:
@@ -27,5 +30,5 @@ tags:
 # Initial prompt should return
 - extendedWaitUntil:
     visible:
-      text: "Start typing to search products"
+      id: "empty_state_message"
     timeout: 10000

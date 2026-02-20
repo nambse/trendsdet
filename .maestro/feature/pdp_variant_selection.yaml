@@ -20,6 +20,11 @@ tags:
     visible:
       id: "detail_product_title"
     timeout: 15000
+- scrollUntilVisible:
+    element:
+      id: "detail_product_price"
+    direction: DOWN
+    timeout: 5000
 - assertVisible:
     id: "detail_product_price"
 
